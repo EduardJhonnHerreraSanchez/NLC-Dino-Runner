@@ -9,8 +9,8 @@ class Game:
         pygame.display.set_caption(TITLE, "Icono")
         pygame.display.set_icon(ICON)
 
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH , SCREEN_HEIGHT))
         # Atributos
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH , SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
         self.playing = False
         self.x_pos_bg = 0
