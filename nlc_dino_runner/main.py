@@ -1,4 +1,7 @@
-import pygame
+from nlc_dino_runner.Componentes.game import Game
 
-print("Hola Mundo")
-print("Hello World")
+
+if __name__ == "__main__":
+    game = Game()
+    game.run()
+
