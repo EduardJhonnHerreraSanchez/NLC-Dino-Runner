@@ -4,8 +4,8 @@ from nlc_dino_runner.utils.constants import RUNNING,DUCKING, JUMPING
 
 class Dinosaur(Sprite):
     X_POS = 50
-    Y_POS = 282
-    Y_POS_DUCK = 312
+    Y_POS = 290
+    Y_POS_DUCK = 315
     JUMP_VEL = 8
 
     def __init__(self):
