@@ -1,9 +1,8 @@
 from pygame.sprite import Sprite
 from nlc_dino_runner.utils.constants import SCREEN_WIDTH
 
+
 # Clase Padre
-
-
 class Obstacles(Sprite):
 
     def __init__(self, image, obstacle_type):
@@ -19,5 +18,3 @@ class Obstacles(Sprite):
 
     def draw(self, screen):
         screen.blit(self.image[self.obstacle_type], self.rect)
-
-

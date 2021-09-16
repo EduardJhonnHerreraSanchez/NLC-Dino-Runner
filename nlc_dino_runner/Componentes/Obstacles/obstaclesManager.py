@@ -1,7 +1,7 @@
 import pygame
 
 from nlc_dino_runner.Componentes.Obstacles.cactus import Cactus
-from nlc_dino_runner.utils.constants import SMALL_CACTUS
+from nlc_dino_runner.utils.constants import SMALL_CACTUS, LARGE_CACTUS, ALL_CACTUS
 
 
 class ObstaclesManager:
@@ -9,16 +9,20 @@ class ObstaclesManager:
         self.obstacles_list = []
 
     def update(self, game):
+
         if len(self.obstacles_list) == 0:
-            self.obstacles_list.append(Cactus(SMALL_CACTUS))
+            self.obstacles_list.append(Cactus(ALL_CACTUS))
 
         for obstacle in self.obstacles_list:
             obstacle.update(game.game_speed, self.obstacles_list)
             if game.player.dino_rect.colliderect(obstacle.rect):
-                pygame.time.delay(1000)
-                game.playing = False
-                game.death_count += 1
-                break
+                if game.player.shield:
+                    self.obstacles_list.remove(obstacle)
+                else:
+                    pygame.time.delay(1000)
+                    game.playing = False
+                    game.death_count += 1
+                    break
             # React1.colliderect(Rect2)
 
     def draw(self, screen):
