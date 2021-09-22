@@ -5,11 +5,13 @@ import os
 TITLE = "DINO RUNNER"
 SCREEN_HEIGHT = 600
 SCREEN_WIDTH = 1100
-FPS = 50
-IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
+FPS = 70  # Cuantas imagenes se muestran por segundo
+
+IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets") # Une rutas de archivos
 
 # Assets Constants
-ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
+ICON = pygame.image.load(os.path.join(IMG_DIR, "dino_wallpaper.png"))
+ICON_MENU = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
 
 RUNNING = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1.png")),

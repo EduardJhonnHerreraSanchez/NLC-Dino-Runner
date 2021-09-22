@@ -20,8 +20,3 @@ class PowerUp(Sprite):
         self.rect.x -= game_speed
         if self.rect.x < -self.rect.width:
             powerups.pop()
-
-
-
-
-
