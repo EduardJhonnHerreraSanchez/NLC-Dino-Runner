@@ -5,7 +5,9 @@ import os
 TITLE = "DINO RUNNER"
 SCREEN_HEIGHT = 600
 SCREEN_WIDTH = 1100
-FPS = 70  # Cuantas imagenes se muestran por segundo
+FPS = 65  # Cuantas imagenes se muestran por segundo
+
+DEFAULT_NUMBER_OF_LIFE = 5
 
 IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets") # Une rutas de archivos
 
