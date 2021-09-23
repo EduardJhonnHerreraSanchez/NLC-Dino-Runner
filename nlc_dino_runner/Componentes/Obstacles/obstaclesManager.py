@@ -25,6 +25,9 @@ class ObstaclesManager:
                 else:
                     game.manager_lives.reduce_lives()
                     self.obstacles_list.remove(obstacle)
+            if game.player.hammer_rect.colliderect(obstacle.rect):
+                if game.player.hammer:
+                    self.obstacles_list.remove(obstacle)
 
     def draw(self, screen):
         for obstacle in self.obstacles_list:

@@ -1,7 +1,8 @@
 import pygame
 
-from nlc_dino_runner.Componentes.lives_player.lives_manager import LivesManager
+from nlc_dino_runner.Componentes.bird_obstacle.bird_obstacle import Bird
 from nlc_dino_runner.Componentes.dinosaur import Dinosaur
+from nlc_dino_runner.Componentes.lives_player.lives_manager import LivesManager
 from nlc_dino_runner.Componentes.powerups.power_up_manager import PowerUpManager
 from nlc_dino_runner.utils import text_utils
 from nlc_dino_runner.Componentes.Obstacles.obstaclesManager import ObstaclesManager
@@ -9,6 +10,7 @@ from nlc_dino_runner.utils.constants import TITLE, SCREEN_HEIGHT, SCREEN_WIDTH, 
 
 
 class Game:
+
     def __init__(self):
         pygame.init()                                      # Inicializa todos los módulos importados de Pygame (Hábilita los módulos)
         pygame.display.set_caption(TITLE)
@@ -19,7 +21,7 @@ class Game:
         self.playing = False                               # Significa que no estamos jugando
         self.x_pos_bg = 0
         self.y_pos_bg = 360
-        self.game_speed = 15
+        self.game_speed = 20
         self.player = Dinosaur()                           # Instanciando player
         self.obstacle_manager = ObstaclesManager()
         self.power_up_manager = PowerUpManager()
@@ -27,12 +29,17 @@ class Game:
         self.running = True
         self.death_count = 0
         self.manager_lives = LivesManager()
+        self.manager_bird = Bird()
 
     def run(self):                                         # Punto de entrada del juego
         self.manager_lives.restart_lives()
         self.obstacle_manager.reset_obstacles()
         self.power_up_manager.reset_power_ups(self.points)            # reset de power ups
+        self.manager_bird.reset()
+
+        self.player.hammer_time_up = 0
         self.points = 0
+        self.game_speed = 15
         self.playing = True
         while self.playing: # 3 Segundos FPS
             self.events()
@@ -46,16 +53,18 @@ class Game:
                 self.playing = False
 
     def update(self):
-        user_input = pygame.key.get_pressed()                # Nos devuelve todo el teclado
-        self.player.update(user_input)
+        self.user_input = pygame.key.get_pressed()                # Nos devuelve todo el teclado
+        self.player.update(self.user_input)
         self.obstacle_manager.update(self)                   # Estamos pasando el mismo game o juego
         self.power_up_manager.update(self.points, self.game_speed, self.player)
+        self.manager_bird.update(self)
 
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255))
         self.draw_background()
         self.player.draw(self.screen)
+        self.manager_bird.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.score()
         self.power_up_manager.draw(self.screen)
@@ -66,12 +75,14 @@ class Game:
 
     def score(self):
         self.points += 1
-        if self.points % 100 == 0:
-            self.game_speed += 1
+        if self.points % 200 == 0:
+            self.game_speed += 1.5
         # text, text_rect = (score_element, score_element_rect) por el return de get_score_element()
         score_element, score_element_rect = text_utils.get_score_element(self.points)
         self.screen.blit(score_element, score_element_rect)
+
         self.player.check_invincibility(self.screen)
+        self.player.check_throw_hammer(self.screen, self.user_input, )
 
     def draw_background(self):
         image_width = BG.get_width() #2404
@@ -128,21 +139,4 @@ class Game:
         else:
             text, text_rect = text_utils.get_centered_message("Press any key to Restart Game")
             self.screen.blit(text, text_rect)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
