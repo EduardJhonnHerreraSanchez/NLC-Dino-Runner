@@ -1,7 +1,9 @@
+import random
+
 import pygame.time
 
 from nlc_dino_runner.Componentes.Obstacles.cactus import Cactus
-from nlc_dino_runner.utils.constants import ALL_CACTUS
+from nlc_dino_runner.utils.constants import ALL_CACTUS, SMALL_CACTUS, LARGE_CACTUS
 
 
 class ObstaclesManager:
@@ -10,7 +12,7 @@ class ObstaclesManager:
 
     def update(self, game):
         if len(self.obstacles_list) == 0:
-            self.obstacles_list.append(Cactus(ALL_CACTUS))
+            self.obstacles_list.append(Cactus(random.choice((SMALL_CACTUS, LARGE_CACTUS))))
 
         for obstacle in self.obstacles_list:
             obstacle.update(game.game_speed, self.obstacles_list)

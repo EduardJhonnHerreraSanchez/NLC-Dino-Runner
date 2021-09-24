@@ -1,5 +1,6 @@
 import pygame
 
+from nlc_dino_runner.Componentes.Obstacles.cloud import Cloud
 from nlc_dino_runner.Componentes.bird_obstacle.bird_obstacle import Bird
 from nlc_dino_runner.Componentes.dinosaur import Dinosaur
 from nlc_dino_runner.Componentes.lives_player.lives_manager import LivesManager
@@ -30,6 +31,7 @@ class Game:
         self.death_count = 0
         self.manager_lives = LivesManager()
         self.manager_bird = Bird()
+        self.manager_cloud = Cloud()
 
     def run(self):                                         # Punto de entrada del juego
         self.manager_lives.restart_lives()
@@ -58,6 +60,7 @@ class Game:
         self.obstacle_manager.update(self)                   # Estamos pasando el mismo game o juego
         self.power_up_manager.update(self.points, self.game_speed, self.player)
         self.manager_bird.update(self)
+        self.manager_cloud.update()
 
     def draw(self):
         self.clock.tick(FPS)
@@ -69,6 +72,7 @@ class Game:
         self.score()
         self.power_up_manager.draw(self.screen)
         self.manager_lives.print(self.screen)
+        self.manager_cloud.draw(self.screen)
 
         pygame.display.update()                              # Actualiza por partes de la pantalla
         pygame.display.flip()                                # Actualizar pantalla completa

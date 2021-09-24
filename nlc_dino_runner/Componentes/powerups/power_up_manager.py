@@ -1,7 +1,6 @@
 import random
 import pygame
 
-# from nlc_dino_runner.Components.power_ups.hammer import Hammer
 from nlc_dino_runner.Componentes.powerups.shield import Shield
 from nlc_dino_runner.Componentes.powerups.single_powers.hammer_manager import HammerManager
 from nlc_dino_runner.utils.constants import HAMMER_TYPE, DEFAULT_TYPE, SHIELD_TYPE
@@ -26,7 +25,6 @@ class PowerUpManager: # REVISAR
             if self.when_appears == self.points:
                 print("generating power up")
                 self.when_appears = random.randint(self.when_appears + 200, self.when_appears + 500) # 200,500
-                # self.power_ups.append(HammerManager())  # la clase Shield() con sus métodos heredados de PowerUp
                 self.power_ups.append(ran(
                     (Shield(),
                      HammerManager())

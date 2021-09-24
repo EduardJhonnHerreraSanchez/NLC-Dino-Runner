@@ -155,7 +155,7 @@ class Dinosaur(Sprite):
 
                 if user_input[pygame.K_SPACE]:
                     self.hammer_rect.y = self.dino_rect.y
-                    self.hammer_rect.x += 10
+                    self.hammer_rect.x += 15
                     screen.blit(HAMMER, self.hammer_rect)
                     if self.hammer_rect.x >= SCREEN_WIDTH:
                         self.hammer_rect.x = self.dino_rect.x + 60

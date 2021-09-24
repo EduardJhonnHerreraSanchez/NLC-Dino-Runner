@@ -3,8 +3,6 @@ import random
 import pygame
 from pygame.sprite import Sprite
 
-from nlc_dino_runner.Componentes import game
-# from nlc_dino_runner.Components.game import Game
 from nlc_dino_runner.Componentes.dinosaur import Dinosaur
 from nlc_dino_runner.utils.constants import SCREEN_WIDTH, BIRD
 
@@ -37,7 +35,6 @@ class Bird(Sprite):
                 game.death_count += 1
             else:
                 game.manager_lives.reduce_lives()
-
         if game.player.hammer_rect.colliderect(self.bird0_rect):
             if game.player.hammer:
                 self.bird0_rect.x = -SCREEN_WIDTH
@@ -56,6 +53,3 @@ class Bird(Sprite):
 
     def reset(self):
         self.bird0_rect.x = SCREEN_WIDTH * 3
-
-    # def remove(self):
-    #     self.bird0_rect.x = -SCREEN_WIDTH
